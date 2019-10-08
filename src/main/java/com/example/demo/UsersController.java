@@ -38,7 +38,7 @@ public class UsersController {
         return modelAndView;
     }
 /**
- * 添加功能   为什么修改不成功
+ * 添加功能
  */
 @RequestMapping(value="add") //list页面点击会进入这里,从这里再返回到添加页面
     public String add(){
