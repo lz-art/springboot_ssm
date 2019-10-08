@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <script th:src="@{/jquery/jquery-2.1.1.min.js}"  src="/jquery/jquery-2.1.1.min.js"></script>
+
+    <script>
+        function del(id) {
+
+            if(confirm('确定要删除吗?')==true){
+              $.ajax({
+                  type:"post",
+                  url:"[[@{/users/del}]]",
+                  data:{"id":id},
+                  success:function(msg){
+                       if(msg>0){
+                           alert("删除成功")
+                           window.location.href="[[@{/users/list}]]"
+                       }else{
+                           alert("网络异常");
+                      }
+                  },
+              })
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>用户列表</h1>
+<table align="center" width="800px" border="1">
+    <tr>
+        <td>编号</td>
+        <td>用户名</td>
+        <td>密码</td>
+        <td>姓名</td>
+        <td>用户状态状态</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="u,i:${list}">
+        <td th:text="${i.count}">编号</td>
+        <td th:text="${u.username}">用户名</td>
+        <td th:text="${u.password}">密码</td>
+        <td th:text="${u.name}">真实姓名</td>
+        <td >
+            <div th:switch="${u.status}">
+                <span th:case="1">有效</span>
+                <span th:case="0">无效</span>
+                <span th:case="*">待定</span>
+            </div>
+        </td>
+        <td>
+            <a th:href="@{/users/add}"  href="/manager/users/add.html">添加</a>
+            <a th:href="@{|/users/update?id=${u.id}|}" href="/manager/users/edit.html">修改</a>
+            <a th:href="@{|/users/view/${u.id}|}" href="/manager/users/view.html">查询</a>
+            <a th:href="@{|javascript:del(${u.id})|}" href="javascript:del(1)">删除</a>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>

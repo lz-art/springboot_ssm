@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script th:src="@{/jquery/jquery-2.1.1.min.js}"  src="/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+<a  th:href="@{/users/list}"  href="/users/list">进入用户列表</a>   <br/>
+
+
+<h1>静态页面可以直接访问的那种</h1>
+模版引擎主页的HTML页面
+<p th:text="${msg}">信息显示</p>
+<hr/>
+<span th:text="${msg1}">测试1</span><!--文档完整输出-->
+<span th:utext="${msg2}">测试2</span><!--如果有标签,则显示标签效果-->
+<hr/>
+<span th:text="'我的字符串数据:'+${msg1}">数据</span><br/>
+<span th:text="|我的字符串数据${msg1}|">数据</span>
+<hr/>
+<a href="/index2.html">第二个页面</a>
+<a href="/index/index" th:href="@{|/index/index?a=21&b=${msg1}|}">查看标签</a>
+</body>
+</html>
